@@ -29,7 +29,7 @@ public class OrderDAO implements DAO<Order>
      */
     @Override
     public Optional<Order> get(int id) {
-        DB db = DB.getInstance();
+        DB_old db = DB_old.getInstance();
         ResultSet rs = null;
         try {
             String sql = "SELECT * FROM HD_Order WHERE Order_ID = ?";
@@ -53,7 +53,7 @@ public class OrderDAO implements DAO<Order>
      */
     @Override
     public List<Order> getAll() {
-        DB db = DB.getInstance();
+        DB_old db = DB_old.getInstance();
         ResultSet rs = null;
         orders = new ArrayList<>();
         try {
@@ -78,7 +78,7 @@ public class OrderDAO implements DAO<Order>
     @Override
     public void insert(Order order)
     {
-        DB db = DB.getInstance();
+        DB_old db = DB_old.getInstance();
         try {
             String sql = "INSERT INTO HD_Order(Order_ID, Order_Price, Order_Date_Time, Item_Name, Customer_ID) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stmt = db.getPreparedStatement(sql);
@@ -102,7 +102,7 @@ public class OrderDAO implements DAO<Order>
      */
     @Override
     public void update(Order order) {
-        DB db = DB.getInstance();
+        DB_old db = DB_old.getInstance();
         try {
             String sql = "UPDATE HD_Order SET Order_Price=?, Order_Date_Time=?, Item_Name=?, Customer_ID=? WHERE Order_ID=?";
             PreparedStatement stmt = db.getPreparedStatement(sql);
@@ -126,7 +126,7 @@ public class OrderDAO implements DAO<Order>
      */
     @Override
     public void delete(Order order) {
-        DB db = DB.getInstance();
+        DB_old db = DB_old.getInstance();
         try {
             String sql = "DELETE FROM HD_Order WHERE Order_ID = ?";
             PreparedStatement stmt = db.getPreparedStatement(sql);
@@ -146,7 +146,7 @@ public class OrderDAO implements DAO<Order>
      */
     @Override
     public List<String> getColumnNames() {
-        DB db = DB.getInstance();
+        DB_old db = DB_old.getInstance();
         ResultSet rs = null;
         List<String> headers = new ArrayList<>();
         try {

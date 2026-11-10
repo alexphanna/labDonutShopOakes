@@ -1,0 +1,5 @@
+CREATE TABLE HD_MenuItem (
+    Item_Name VARCHAR(20) NOT NULL PRIMARY KEY,
+    Options VARCHAR(20) NOT NULL,
+    Price int NOT NULL
+);
