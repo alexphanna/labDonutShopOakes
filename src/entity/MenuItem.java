@@ -1,14 +1,14 @@
 package entity;
 
+import org.bson.Document;
+
 public class MenuItem {
     private String itemName;
-    private String[] options;
     private int price;
 
-    public MenuItem(String itemName, String[] options, int price)
+    public MenuItem(String itemName, int price)
     {
         this.itemName = itemName;
-        this.options = options;
         this.price = price;
     }
 
@@ -19,13 +19,15 @@ public class MenuItem {
     public String getItemName() {
         return itemName;
     }
-    
-    public String[] getOptions() {
-        return options;
+
+    public Document toDocument() {
+        Document doc = new Document("item_name", itemName)
+                .append("price", price);
+        return doc;
     }
 
     @Override
     public String toString() {
-        return "MenuItem{" + "name='" + itemName + '\'' + ", options=" + java.util.Arrays.toString(options) + ", price=" + price + '}';
+        return "MenuItem{" + "name='" + itemName + '\'' + ", price=" + price + '}';
     }
 }

@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package entity;
+
+import org.bson.Document;
+
 /**
  *
  * @author Gokhan
@@ -13,16 +16,14 @@ public class Order
     private int ID;
     private int price;
     private String dateTime;
-    private String itemName;
-    private int customerID;
+    private MenuItem[] items;
 
-    public Order(int ID, int price, String dateTime, String itemName, int customerID)
+    public Order(int ID, int price, String dateTime)
     {
         this.ID = ID;
         this.price = price;
         this.dateTime = dateTime;
-        this.itemName = itemName;
-        this.customerID = customerID;
+        this.items = new MenuItem[0]; // Initialize with an empty array
     }
 
     public int getID() {
@@ -37,16 +38,26 @@ public class Order
         return dateTime;
     }
 
-    public String getItemName() {
-        return itemName;
+    public MenuItem[] getItems() {
+        return items;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public Document toDocument() {
+        Document items = new Document();
+        
+        for (int i = 0; i < this.items.length; i++) {
+            items.append("item_" + (i + 1), this.items[i].toDocument());
+        }
+
+        Document doc = new Document("ID", ID)
+                .append("price", price)
+                .append("dateTime", dateTime)
+                .append("items", items); // Assuming items is an array of MenuItem objects
+        return doc;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "ID=" + ID + ", price=" + price + ", dateTime=" + dateTime + ", itemName=" + itemName + ", customerID=" + customerID + '}';
+        return "Order{" + "ID=" + ID + ", price=" + price + ", dateTime=" + dateTime + ", items=" + java.util.Arrays.toString(items) + '}';
     }
 }
